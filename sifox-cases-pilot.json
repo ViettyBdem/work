@@ -1,0 +1,3009 @@
+{
+  "format": 2,
+  "generated": "2026-11-12T14:30:58+0000",
+  "nodes": [
+    {
+      "id": "AUTH-001",
+      "module": "Авторизация и выбор роли",
+      "title": "Войти в кабинет руководителя",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S1 Блокирующий",
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QUE-001"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Войти в АРМ учётной записью с ролью «Руководитель»",
+          "then": "Открыт кабинет руководителя",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "В шапке выбрать «Все мои направления»",
+          "then": "В шапке выбрано «Все мои направления»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-S01",
+      "module": "Список очередей",
+      "title": "Стенд: в направлениях руководителя нет ни одной очереди",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 3,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QUE-002"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Подготовить стенд (или взять руководителя с новыми направлениями): ни активных, ни архивных очередей",
+          "then": "В направлениях руководителя нет ни одной очереди",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-001",
+      "module": "Список очередей",
+      "title": "Открыть раздел «Очереди»",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "AUTH-001"
+      ],
+      "children": [
+        "QUE-002",
+        "QUE-003",
+        "QUE-004"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать пункт меню «Очереди»",
+          "then": "Открыт раздел с заголовком «ОЧЕРЕДИ»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Есть кнопка «+ Создать очередь»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Таблица с колонками «Очередь», «Операторы», «Группы», «Распределение», «Резерв», «Статус» и колонкой действий",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-002",
+      "module": "Список очередей",
+      "title": "Пустое состояние списка очередей",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-001",
+        "QUE-S01"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "В направлениях руководителя нет ни одной очереди",
+          "when": "Осмотреть экран",
+          "then": "Строк в таблице нет",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Отображается блок «В НАПРАВЛЕНИИ НЕТ ОЧЕРЕДЕЙ» с текстом «Создайте первую очередь и выберите для неё рабочий номер — входящие начнут распределяться по заданным правилам.» и кнопкой «Создать очередь»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": "Нажать «Создать очередь» в блоке пустого состояния",
+          "then": "Открывается форма «СОЗДАНИЕ ОЧЕРЕДИ»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-003",
+      "module": "Список очередей",
+      "title": "Перейти к созданию очереди",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QUE-001"
+      ],
+      "children": [
+        "QFRM-001"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать «+ Создать очередь»",
+          "then": "Открывается экран «СОЗДАНИЕ ОЧЕРЕДИ» с кнопкой «Назад»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "В меню выделен пункт «Очереди»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-004",
+      "module": "Список очередей",
+      "title": "Строки списка очередей",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-001",
+        "QFRM-022"
+      ],
+      "children": [
+        "QUE-005",
+        "QUE-006",
+        "QUE-007",
+        "QUE-008",
+        "QUE-009"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Создана хотя бы одна очередь, архивных очередей нет",
+          "when": "Открыть раздел «Очереди»",
+          "then": "Строки таблицы — все активные очереди направлений руководителя",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Кнопки «Показать архив» нет",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-005",
+      "module": "Список очередей",
+      "title": "Строка работающей очереди",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-004",
+        "QFRM-026",
+        "QFRM-S05"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Текущее время — в рабочих часах очереди «Ипотека»",
+          "when": "Осмотреть строку очереди «Ипотека»",
+          "then": "Показаны название очереди, её рабочий номер и направление",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Операторы — число операторов очереди",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Группы — «<группа> (<число операторов группы>)»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Распределение — стратегия очереди и «приоритет <приоритет очереди>»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": null,
+          "then": "Резерв — название резервной очереди («Вклады»)",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 6,
+          "given": null,
+          "when": null,
+          "then": "Статус — зелёная метка «Работает»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 7,
+          "given": null,
+          "when": null,
+          "then": "Действия: «Клонировать…», «Редактировать», «Архивировать очередь»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-006",
+      "module": "Список очередей",
+      "title": "Строка очереди вне рабочего времени",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-004",
+        "QFRM-033"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Текущее время — до начала рабочих часов очереди «Кредиты»",
+          "when": "Осмотреть строку очереди «Кредиты»",
+          "then": "Строка полупрозрачная",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Операторы, Группы, Распределение и Резерв соответствуют настройкам очереди",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Статус — серая метка «Не работает до <время начала работы очереди>»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-007",
+      "module": "Список очередей",
+      "title": "Открыть очередь на редактирование кликом по строке",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QUE-004"
+      ],
+      "children": [
+        "QFRM-028",
+        "QFRM-033"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать на строку любой очереди (вне кнопок действий)",
+          "then": "Открывается экран «РЕДАКТИРОВАНИЕ ОЧЕРЕДИ» с данными выбранной очереди и кнопкой «Назад»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-008",
+      "module": "Список очередей",
+      "title": "Клонировать очередь",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QUE-004",
+        "QFRM-026"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Навести на первую иконку в строке очереди «Ипотека»",
+          "then": "Подсказка «Клонировать — создать новую очередь с такими же настройками»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Нажать эту иконку",
+          "then": "Открывается «СОЗДАНИЕ ОЧЕРЕДИ» с текстом «Настройки скопированы из очереди «Ипотека». Укажите название и рабочий номер.»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Название пустое, номер — «Выберите номер»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Приоритет, стратегия, лимит каналов, резервная очередь и блок группы (с числом операторов) — как у очереди «Ипотека»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": null,
+          "then": "Отмеченные праздничные дни («Отмечено: <N>») — как у очереди «Ипотека»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-009",
+      "module": "Список очередей",
+      "title": "Архивирование очереди: окно подтверждения",
+      "access": "x",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не пройден",
+      "parents": [
+        "QUE-004",
+        "QFRM-026"
+      ],
+      "children": [
+        "QUE-010"
+      ],
+      "blocking": true,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Очередь «Вклады» с оператором является резервной для очереди «Ипотека»",
+          "when": "Нажать иконку «Архивировать очередь» в строке очереди «Вклады»",
+          "then": "Открывается модальное окно «АРХИВИРОВАТЬ ОЧЕРЕДЬ «ВКЛАДЫ»?»",
+          "gate": true,
+          "state": "fail",
+          "note": "Нет иконки архивировать очередь в списке очередей."
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Текст окна: «Очередь перестанет принимать вызовы на номер <рабочий номер очереди>. Операторы (<число операторов очереди>) будут отвязаны от очереди. Она резервная для «Ипотека» — там резерв сбросится. История звонков и отчёты сохранятся. Очередь можно восстановить из архива.»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Кнопки «Отмена» и «Архивировать» (красная)",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-010",
+      "module": "Список очередей",
+      "title": "Архивировать очередь",
+      "access": "x",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-009"
+      ],
+      "children": [
+        "QUE-011"
+      ],
+      "blocking": false,
+      "blocked_by": [
+        "QUE-009"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Архивных очередей нет",
+          "when": "В окне подтверждения нажать «Архивировать»",
+          "then": "Тост типа «ОЧЕРЕДИ» с заголовком «Очередь в архиве» и текстом ««Вклады» больше не принимает вызовы.»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Очередь «Вклады» исчезает из списка",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "У очереди «Ипотека» резерв — «—»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Появляется кнопка «Показать архив (1)»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": "Открыть «Дашборд» и раскрыть фильтр очередей",
+          "then": "Очереди «Вклады» в фильтре очередей дашборда нет",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-011",
+      "module": "Список очередей",
+      "title": "Показать архивные очереди",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-010"
+      ],
+      "children": [
+        "QUE-012"
+      ],
+      "blocking": false,
+      "blocked_by": [
+        "QUE-009"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Есть архивная очередь, показ архива выключен",
+          "when": "Нажать «Показать архив (<N>)»",
+          "then": "Кнопка меняется на «Скрыть архив (<N>)», где N — число архивных очередей",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "В списке появляются полупрозрачные строки архивных очередей с серой меткой «Архив»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Вместо иконки архивирования — иконка «Восстановить из архива»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QUE-012",
+      "module": "Список очередей",
+      "title": "Восстановить очередь из архива",
+      "access": "x",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-011",
+        "QFRM-S05"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [
+        "QUE-009"
+      ],
+      "steps": [
+        {
+          "n": 1,
+          "given": "В архиве ровно одна очередь — «Вклады»; текущее время — в её рабочих часах; показ архива включён",
+          "when": "Нажать «Восстановить из архива» в строке архивной очереди",
+          "then": "Окно «ВОССТАНОВИТЬ ОЧЕРЕДЬ «ВКЛАДЫ»?» с текстом «Очередь снова начнёт принимать вызовы. Назначения операторов вернутся — их можно изменить в настройках очереди.» и синей кнопкой «Восстановить»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Нажать «Восстановить»",
+          "then": "Очередь «Вклады» в списке со статусом «Работает»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Число операторов очереди — как до архивирования",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Кнопка «Показать/Скрыть архив» исчезает",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-S01",
+      "module": "Форма очереди",
+      "title": "Стенд: есть минимум три свободных рабочих номера",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 1,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QFRM-005",
+        "QFRM-011",
+        "QFRM-013",
+        "QFRM-014",
+        "QFRM-022",
+        "QFRM-023",
+        "QFRM-025",
+        "QFRM-026"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Проверить на стенде рабочие номера (FTN) направления",
+          "then": "Свободных рабочих номеров не меньше трёх",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-S02",
+      "module": "Форма очереди",
+      "title": "Стенд: в направлении есть группа с операторами и ещё два оператора",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 1,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QFRM-017",
+        "QFRM-020",
+        "QFRM-026"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Проверить на стенде группы и операторов первого направления руководителя (после переписывания модуля «Группы и операторы» этот узел заменят его кейсы)",
+          "then": "В направлении есть группа с операторами и минимум два оператора для добавления по одному",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-S03",
+      "module": "Форма очереди",
+      "title": "Стенд: руководителю назначено два направления с группой и очередью в каждом",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 2,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QFRM-021"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Проверить на стенде направления руководителя",
+          "then": "Руководителю назначено минимум два направления; в каждом из направлений 1 и 2 есть группа с операторами и очередь",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-S04",
+      "module": "Форма очереди",
+      "title": "Стенд: свободных рабочих номеров нет",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 2,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QFRM-006"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Подготовить стенд: все рабочие номера закреплены за очередями",
+          "then": "Свободных рабочих номеров нет",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-S05",
+      "module": "Форма очереди",
+      "title": "Условие: будний день, 09:00–20:00",
+      "access": "r",
+      "setup": true,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": null,
+      "effective_priority": 1,
+      "severity": null,
+      "status": "Не запускался",
+      "parents": [],
+      "children": [
+        "QUE-005",
+        "QUE-012",
+        "QFRM-022"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Выполнять зависящие от этого узла кейсы в рабочие часы по умолчанию",
+          "then": "Сейчас будний день, время между 09:00 и 20:00",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-001",
+      "module": "Форма очереди",
+      "title": "Структура формы создания очереди",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-003"
+      ],
+      "children": [
+        "QFRM-002",
+        "QFRM-003",
+        "QFRM-004",
+        "QFRM-005",
+        "QFRM-006",
+        "QFRM-008",
+        "QFRM-009",
+        "QFRM-010",
+        "QFRM-011",
+        "QFRM-012",
+        "QFRM-013",
+        "QFRM-014",
+        "QFRM-015",
+        "QFRM-016",
+        "QFRM-017",
+        "QFRM-020",
+        "QFRM-021",
+        "QFRM-022",
+        "QFRM-023",
+        "QFRM-027"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Осмотреть экран",
+          "then": "Заголовок «СОЗДАНИЕ ОЧЕРЕДИ» с кнопкой «Назад»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Секции «ОСНОВНОЕ», «ОПЕРАТОРЫ ОЧЕРЕДИ», «РАСПРЕДЕЛЕНИЕ И ЛИМИТЫ», «РАБОЧЕЕ ВРЕМЯ И КАЛЕНДАРЬ», «ПЕРЕПОЛНЕНИЕ И ОЖИДАНИЕ»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Внизу кнопки «Отмена» и «Создать очередь»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-002",
+      "module": "Форма очереди",
+      "title": "Значения по умолчанию: секция «Основное»",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Осмотреть секцию «Основное»",
+          "then": "Плашка «Можно скопировать все настройки существующей очереди — кроме названия и рабочего номера.» со списком «Скопировать настройки из очереди…»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Поле «Название *» пустое с подсказкой «Например, «Кредиты»»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "«Направление *» — первое из направлений руководителя",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "«Рабочий номер (FTN) *» — «Выберите номер»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": null,
+          "then": "«Приоритет *» — 1 с пояснением «Целое число: чем больше, тем выше»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-003",
+      "module": "Форма очереди",
+      "title": "Значения по умолчанию: секция «Распределение и лимиты»",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [
+        "QFRM-007"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Осмотреть секцию «Распределение и лимиты»",
+          "then": "Карточка «По кругу · по умолчанию» выбрана, текст «Вызовы распределяются по очереди между всеми операторами.»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Карточка «Первый освободившийся» — «Вызов получает первый свободный оператор по порядку списка.»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Карточка «Дольше всего свободный» — «Вызов получает оператор, который дольше всех ждёт вызова.»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "«Ожидание ответа оператора, сек *» — 20",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": null,
+          "then": "«Максимальное ожидание клиента, мин *» — 5",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 6,
+          "given": null,
+          "when": null,
+          "then": "«Лимит каналов очереди *» — 5",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-004",
+      "module": "Форма очереди",
+      "title": "Отмена формы без изменений",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Ничего не меняя, нажать «Отмена»",
+          "then": "Окно о несохранённых изменениях не показывается",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Открывается раздел «Очереди»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-005",
+      "module": "Форма очереди",
+      "title": "Список рабочих номеров: занятые и свободные",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-022",
+        "QFRM-S01"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Есть рабочие номера, закреплённые за очередями, и минимум один свободный",
+          "when": "Раскрыть список «Рабочий номер (FTN) *»",
+          "then": "Номера, закреплённые за очередями, неактивны и подписаны «<номер> — закреплён за очередью «<очередь>»»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Свободные номера доступны с подписью «<номер> — свободен»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-006",
+      "module": "Форма очереди",
+      "title": "Список рабочих номеров: свободных нет",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S04"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Все рабочие номера закреплены за очередями",
+          "when": "Раскрыть список «Рабочий номер (FTN) *»",
+          "then": "Все номера в списке неактивны",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Под полем жёлтая плашка «Свободных номеров нет.»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-007",
+      "module": "Форма очереди",
+      "title": "Выбрать стратегию распределения",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-003"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать карточку «Первый освободившийся»",
+          "then": "Карточка «Первый освободившийся» выделяется: синяя рамка, отмеченная радиокнопка",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Выделение с карточки «По кругу · по умолчанию» снимается",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-008",
+      "module": "Форма очереди",
+      "title": "Включить рабочий день недели",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать кнопку «Сб»",
+          "then": "«Сб» становится синей (подсказка «Рабочий день»)",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Подпись — «Выходные: Вс»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "В календаре субботы перестают быть серыми",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-009",
+      "module": "Форма очереди",
+      "title": "Отключить все рабочие дни",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Рабочие дни по умолчанию: «Пн»–«Пт»",
+          "when": "Отключить «Пн», «Вт», «Ср», «Чт», «Пт»",
+          "then": "Подпись — «Нет рабочих дней — очередь не будет работать»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Все дни календаря серые",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-010",
+      "module": "Форма очереди",
+      "title": "Отметить и снять праздничный день",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать на любой рабочий день в календаре",
+          "then": "День выделен красным, подпись «…Отмечено: 1»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Повторно нажать на этот же день",
+          "then": "Отметка снимается, подпись «…Отмечено: 0»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-011",
+      "module": "Форма очереди",
+      "title": "Валидация: название очереди обязательно",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S01"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Оставить «Название *» пустым, выбрать любой свободный рабочий номер и нажать «Создать очередь»",
+          "then": "Очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Под полем названия красный текст «Укажите название очереди»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-012",
+      "module": "Форма очереди",
+      "title": "Валидация: рабочий номер обязателен",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Ввести название «Кредиты», номер не выбирать и нажать «Создать очередь»",
+          "then": "Очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Под полем номера ошибка «Выберите рабочий номер»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-013",
+      "module": "Форма очереди",
+      "title": "Валидация: недопустимые значения приоритета",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S01"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Заполнить название и номер, ввести в «Приоритет *» значение «-1» и нажать «Создать очередь»",
+          "then": "Ошибка «Приоритет — целое неотрицательное число», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Ввести в «Приоритет *» значение «1.5» и нажать «Создать очередь»",
+          "then": "Ошибка «Приоритет — целое неотрицательное число», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": "Ввести в «Приоритет *» значение «abc» и нажать «Создать очередь»",
+          "then": "Ошибка «Приоритет — целое неотрицательное число», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": "Очистить «Приоритет *» и нажать «Создать очередь»",
+          "then": "Ошибка «Приоритет — целое неотрицательное число», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-014",
+      "module": "Форма очереди",
+      "title": "Валидация: время окончания работы раньше начала",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S01"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Заполнить название и номер, задать часы работы 20:00 — 09:00 и нажать «Создать очередь»",
+          "then": "Под часами работы ошибка «Время окончания должно быть позже начала», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Задать часы работы 10:00 — 10:00 и нажать «Создать очередь»",
+          "then": "Под часами работы ошибка «Время окончания должно быть позже начала», очередь не создаётся",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-015",
+      "module": "Форма очереди",
+      "title": "Подсветка полей с ошибкой",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S4 Незначительный",
+      "status": "Не пройден",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Оставить «Название *» пустым, номер не выбирать и нажать «Создать очередь»",
+          "then": "Под полями ошибки «Укажите название очереди» и «Выберите рабочий номер»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Рамка поля «Название *» красная",
+          "gate": false,
+          "state": "fail",
+          "note": "Рамки ввода полей не окрашиваются в красный"
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Рамка списка «Рабочий номер (FTN) *» красная",
+          "gate": false,
+          "state": "fail",
+          "note": "Рамки ввода полей не окрашиваются в красный"
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-016",
+      "module": "Форма очереди",
+      "title": "Сохранение из окна несохранённых изменений при ошибках валидации",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Изменить приоритет на 3, название оставить пустым и нажать «Отмена» внизу формы",
+          "then": "Окно с текстом «Изменения в очереди «Новая очередь» не сохранены. Сохранить перед выходом?»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "В окне нажать «Сохранить»",
+          "then": "Окно закрывается, форма остаётся открытой",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "В форме ошибки «Укажите название очереди» и «Выберите рабочий номер»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-017",
+      "module": "Форма очереди",
+      "title": "Добавить оператора отдельно",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S02"
+      ],
+      "children": [
+        "QFRM-018",
+        "QFRM-019",
+        "QFRM-025"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "В списке «+ Добавить оператора» выбрать любого оператора («<ФИО> · <группа>»)",
+          "then": "Появляется блок «Добавлены отдельно» — «1 опер.» со строкой «1 <ФИО> · <группа>» и кнопками ↑ ↓ ✕",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Оператор пропадает из списка добавления",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-018",
+      "module": "Форма очереди",
+      "title": "Убрать отдельно добавленного оператора",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-017"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Отдельно добавлен один оператор",
+          "when": "Нажать ✕ (подсказка «Убрать») в строке оператора",
+          "then": "Оператор удаляется из очереди, блок «Добавлены отдельно» исчезает",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Оператор снова доступен в списке добавления",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-019",
+      "module": "Форма очереди",
+      "title": "Изменить порядок операторов",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-017"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Отдельно добавлен оператор 1",
+          "when": "Добавить отдельно оператора 2 и нажать ↓ (подсказка «Ниже») у оператора 1",
+          "then": "Порядок: 1 — оператор 2, 2 — оператор 1",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Нажать ↑ (подсказка «Выше») у первой строки",
+          "then": "Порядок не меняется",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-020",
+      "module": "Форма очереди",
+      "title": "Добавить группу целиком",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S02"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "В списке «+ Добавить группу целиком» выбрать любую группу («<группа> · <N> опер.»)",
+          "then": "Появляется блок с иконкой группы: «<группа>», «Группа целиком · <N> опер. · новые операторы группы попадут в очередь автоматически», кнопка «Убрать группу»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "В блоке N строк операторов группы с номерами 1–N и кнопками ↑ ↓ без ✕",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Плашка «Очередь без операторов…» скрывается",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "В списке групп вариант становится неактивным: «<группа> · <N> опер. — уже добавлена»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-021",
+      "module": "Форма очереди",
+      "title": "Смена направления сбрасывает операторов и резерв",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S03"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "В поле «Направление *» — направление 1",
+          "when": "Добавить группу целиком, выбрать резервную очередь, затем в поле «Направление *» выбрать направление 2",
+          "then": "Операторы и группы удаляются, показана плашка «Очередь без операторов…»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Резерв — «Не задана»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "В списке групп — только группы направления 2",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "В списке резервных очередей — только очереди направления 2",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-022",
+      "module": "Форма очереди",
+      "title": "Создать очередь без операторов",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S01",
+        "QFRM-S05"
+      ],
+      "children": [
+        "QUE-004",
+        "QFRM-005",
+        "QFRM-033"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Ввести название «Кредиты», выбрать любой свободный рабочий номер, операторов не добавлять и нажать «Создать очередь»; если открылось окно «Очередь без операторов» — нажать в нём «Сохранить»",
+          "then": "Открывается раздел «Очереди», в списке есть строка «Кредиты»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Тост «ОЧЕРЕДЬ СОЗДАНА» — «Кредиты» — работает» с текстом «Входящие на <выбранный рабочий номер> распределяются по стратегии «По кругу».»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "В строке «Кредиты» — выбранный рабочий номер и направление из формы",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": "Текущее время — в рабочих часах по умолчанию (будний день, 09:00–20:00)",
+          "when": null,
+          "then": "В строке: Операторы «Нет» (жёлто-коричневым), Группы «—», «По кругу», «приоритет 1», резерв «—», статус «Работает»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-023",
+      "module": "Форма очереди",
+      "title": "Плашка об очереди без операторов",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-S01"
+      ],
+      "children": [
+        "QFRM-024"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Ввести название «Без операторов», выбрать любой свободный рабочий номер, операторов не добавлять",
+          "then": "Под блоком операторов жёлтая плашка «Очередь без операторов: все вызовы будут уходить в обратный звонок.»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-024",
+      "module": "Форма очереди",
+      "title": "Окно подтверждения очереди без операторов",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не пройден",
+      "parents": [
+        "QFRM-023"
+      ],
+      "children": [],
+      "blocking": true,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Нажать «Создать очередь»",
+          "then": "Открывается окно «ОЧЕРЕДЬ БЕЗ ОПЕРАТОРОВ»",
+          "gate": true,
+          "state": "fail",
+          "note": "Окно не было отображено.\nПодтверждения о создании очереди без операторов не было.\nОчередь создана без подтверждения."
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Текст окна: «Все вызовы на рабочий номер будут уходить в обратный звонок. Сохранить всё равно?»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Кнопки «Отмена» и «Сохранить»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-025",
+      "module": "Форма очереди",
+      "title": "Создать очередь с приоритетом 0",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 1,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-017",
+        "QFRM-S01"
+      ],
+      "children": [
+        "QFRM-026"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "В форме отдельно добавлен оператор",
+          "when": "Ввести название «Вклады», выбрать любой свободный рабочий номер, ввести приоритет 0 и нажать «Создать очередь»",
+          "then": "Ошибки приоритета нет, очередь создаётся",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "В списке «Очереди» у очереди «Вклады» — «приоритет 0»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-026",
+      "module": "Форма очереди",
+      "title": "Создать очередь с группой, резервом и праздничным днём",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-025",
+        "QFRM-S02",
+        "QFRM-S01"
+      ],
+      "children": [
+        "QUE-005",
+        "QUE-008",
+        "QUE-009",
+        "QFRM-027",
+        "QFRM-028"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Есть очередь «Вклады»",
+          "when": "Нажать «+ Создать очередь» и в форме: название «Ипотека», свободный рабочий номер, стратегия «Первый освободившийся», приоритет 2, лимит каналов 7, другая музыка ожидания; добавить группу целиком; резервная очередь — «Вклады»; отметить один праздничный день; нажать «Создать очередь»",
+          "then": "Открывается раздел «Очереди», в списке есть строка «Ипотека»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-027",
+      "module": "Форма очереди",
+      "title": "Скопировать настройки существующей очереди",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-001",
+        "QFRM-026"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Настройки очереди «Ипотека» отличаются от значений по умолчанию",
+          "when": "Ввести название «Тест» и в списке «Скопировать настройки из очереди…» выбрать «Ипотека · <рабочий номер>»",
+          "then": "Тост «Настройки скопированы из «Ипотека»» с текстом «Стратегия, лимиты, рабочее время, резерв, callback, CSAT и операторы перенесены. Укажите название и рабочий номер.»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Плашка меняется на «Настройки скопированы из очереди «Ипотека». Укажите название и рабочий номер.»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Название «Тест» сохранено, рабочий номер не скопирован",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Направление, стратегия, приоритет, лимит каналов, музыка ожидания и блок группы (с числом операторов) — как у очереди «Ипотека»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-028",
+      "module": "Форма очереди",
+      "title": "Данные очереди в форме редактирования",
+      "access": "r",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QUE-007",
+        "QFRM-026"
+      ],
+      "children": [
+        "QFRM-029",
+        "QFRM-030",
+        "QFRM-032"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Кликом по строке открыта очередь «Ипотека»",
+          "when": "Осмотреть форму",
+          "then": "Заголовок «РЕДАКТИРОВАНИЕ ОЧЕРЕДИ», плашки копирования нет",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Рабочий номер только для чтения (замок)",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Название, приоритет, стратегия, таймеры и лимит каналов, часы работы соответствуют сохранённым настройкам очереди",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": null,
+          "then": "Праздничные дни отмечены красным, подпись «Отмечено: <N>»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 5,
+          "given": null,
+          "when": null,
+          "then": "Резервная очередь и блок группы (с числом операторов) соответствуют сохранённым настройкам",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 6,
+          "given": null,
+          "when": null,
+          "then": "Есть кнопка «Сохранить»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-029",
+      "module": "Форма очереди",
+      "title": "Сохранить изменения очереди",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 1,
+      "effective_priority": 1,
+      "severity": "S2 Критический",
+      "status": "Пройден",
+      "parents": [
+        "QFRM-028"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Текущий приоритет очереди запомнен",
+          "when": "Изменить приоритет на другое допустимое значение (например, на 1 больше текущего) и нажать «Сохранить»",
+          "then": "Открывается раздел «Очереди»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Тост «ОЧЕРЕДЬ СОХРАНЕНА» — «Параметры «<название очереди>» обновлены» с текстом «Изменения применяются к новым вызовам. Значения до/после записаны в журнал аудита.»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "В строке очереди — «приоритет <новое значение>»",
+          "gate": false,
+          "state": "ok",
+          "note": ""
+        },
+        {
+          "n": 4,
+          "given": null,
+          "when": "Открыть «Журнал аудита»",
+          "then": "Новая запись «Изменение очереди»: «Приоритет <прежнее значение>» → «Приоритет <новое значение>»",
+          "gate": true,
+          "state": "ok",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-030",
+      "module": "Форма очереди",
+      "title": "Предупреждение при уходе с изменённой формы",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-028"
+      ],
+      "children": [
+        "QFRM-031",
+        "QFRM-032"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Изменить название очереди (например, дописать « 2») и нажать пункт меню «Дашборд»",
+          "then": "Переход не выполняется, открывается окно «ЕСТЬ НЕСОХРАНЁННЫЕ ИЗМЕНЕНИЯ»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Текст окна: «Изменения в очереди «<изменённое название>» не сохранены. Сохранить перед выходом?»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 3,
+          "given": null,
+          "when": null,
+          "then": "Кнопки «Отмена», «Выйти без сохранения» (красная), «Сохранить»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-031",
+      "module": "Форма очереди",
+      "title": "Выйти с формы без сохранения",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-030"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Название очереди изменено, открыто окно «Есть несохранённые изменения»",
+          "when": "Нажать «Выйти без сохранения»",
+          "then": "Открывается «Оперативный дашборд»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": "Открыть раздел «Очереди»",
+          "then": "Очередь называется прежним названием",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-032",
+      "module": "Форма очереди",
+      "title": "Сохранить из окна несохранённых изменений",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 2,
+      "effective_priority": 2,
+      "severity": "S2 Критический",
+      "status": "Не запускался",
+      "parents": [
+        "QFRM-028",
+        "QFRM-030"
+      ],
+      "children": [],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": null,
+          "when": "Изменить приоритет, нажать пункт меню «Дашборд» и в окне «Есть несохранённые изменения» нажать «Сохранить»",
+          "then": "Изменения сохраняются: тост «Параметры «<название очереди>» обновлены»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        },
+        {
+          "n": 2,
+          "given": null,
+          "when": null,
+          "then": "Открывается выбранный раздел «Оперативный дашборд»",
+          "gate": false,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    },
+    {
+      "id": "QFRM-033",
+      "module": "Форма очереди",
+      "title": "Сдвинуть начало рабочих часов очереди",
+      "access": "w",
+      "setup": false,
+      "roles": [
+        "Руководитель"
+      ],
+      "priority": 3,
+      "effective_priority": 3,
+      "severity": "S3 Значительный",
+      "status": "Не запускался",
+      "parents": [
+        "QUE-007",
+        "QFRM-022"
+      ],
+      "children": [
+        "QUE-006"
+      ],
+      "blocking": false,
+      "blocked_by": [],
+      "steps": [
+        {
+          "n": 1,
+          "given": "Кликом по строке открыта очередь «Кредиты»",
+          "when": "Задать начало рабочих часов позже текущего времени и нажать «Сохранить»",
+          "then": "Открывается раздел «Очереди»",
+          "gate": true,
+          "state": "todo",
+          "note": ""
+        }
+      ],
+      "comment": "",
+      "reports": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "AUTH-001",
+      "to": "QUE-001",
+      "primary": true
+    },
+    {
+      "from": "QUE-001",
+      "to": "QUE-002",
+      "primary": true
+    },
+    {
+      "from": "QUE-S01",
+      "to": "QUE-002",
+      "primary": false
+    },
+    {
+      "from": "QUE-001",
+      "to": "QUE-003",
+      "primary": true
+    },
+    {
+      "from": "QUE-001",
+      "to": "QUE-004",
+      "primary": true
+    },
+    {
+      "from": "QFRM-022",
+      "to": "QUE-004",
+      "primary": false
+    },
+    {
+      "from": "QUE-004",
+      "to": "QUE-005",
+      "primary": true
+    },
+    {
+      "from": "QFRM-026",
+      "to": "QUE-005",
+      "primary": false
+    },
+    {
+      "from": "QFRM-S05",
+      "to": "QUE-005",
+      "primary": false
+    },
+    {
+      "from": "QUE-004",
+      "to": "QUE-006",
+      "primary": true
+    },
+    {
+      "from": "QFRM-033",
+      "to": "QUE-006",
+      "primary": false
+    },
+    {
+      "from": "QUE-004",
+      "to": "QUE-007",
+      "primary": true
+    },
+    {
+      "from": "QUE-004",
+      "to": "QUE-008",
+      "primary": true
+    },
+    {
+      "from": "QFRM-026",
+      "to": "QUE-008",
+      "primary": false
+    },
+    {
+      "from": "QUE-004",
+      "to": "QUE-009",
+      "primary": true
+    },
+    {
+      "from": "QFRM-026",
+      "to": "QUE-009",
+      "primary": false
+    },
+    {
+      "from": "QUE-009",
+      "to": "QUE-010",
+      "primary": true
+    },
+    {
+      "from": "QUE-010",
+      "to": "QUE-011",
+      "primary": true
+    },
+    {
+      "from": "QUE-011",
+      "to": "QUE-012",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S05",
+      "to": "QUE-012",
+      "primary": false
+    },
+    {
+      "from": "QUE-003",
+      "to": "QFRM-001",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-002",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-003",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-004",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-005",
+      "primary": true
+    },
+    {
+      "from": "QFRM-022",
+      "to": "QFRM-005",
+      "primary": false
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-005",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-006",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S04",
+      "to": "QFRM-006",
+      "primary": false
+    },
+    {
+      "from": "QFRM-003",
+      "to": "QFRM-007",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-008",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-009",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-010",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-011",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-011",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-012",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-013",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-013",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-014",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-014",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-015",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-016",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-017",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S02",
+      "to": "QFRM-017",
+      "primary": false
+    },
+    {
+      "from": "QFRM-017",
+      "to": "QFRM-018",
+      "primary": true
+    },
+    {
+      "from": "QFRM-017",
+      "to": "QFRM-019",
+      "primary": true
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-020",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S02",
+      "to": "QFRM-020",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-021",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S03",
+      "to": "QFRM-021",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-022",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-022",
+      "primary": false
+    },
+    {
+      "from": "QFRM-S05",
+      "to": "QFRM-022",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-023",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-023",
+      "primary": false
+    },
+    {
+      "from": "QFRM-023",
+      "to": "QFRM-024",
+      "primary": true
+    },
+    {
+      "from": "QFRM-017",
+      "to": "QFRM-025",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-025",
+      "primary": false
+    },
+    {
+      "from": "QFRM-025",
+      "to": "QFRM-026",
+      "primary": true
+    },
+    {
+      "from": "QFRM-S02",
+      "to": "QFRM-026",
+      "primary": false
+    },
+    {
+      "from": "QFRM-S01",
+      "to": "QFRM-026",
+      "primary": false
+    },
+    {
+      "from": "QFRM-001",
+      "to": "QFRM-027",
+      "primary": true
+    },
+    {
+      "from": "QFRM-026",
+      "to": "QFRM-027",
+      "primary": false
+    },
+    {
+      "from": "QUE-007",
+      "to": "QFRM-028",
+      "primary": true
+    },
+    {
+      "from": "QFRM-026",
+      "to": "QFRM-028",
+      "primary": false
+    },
+    {
+      "from": "QFRM-028",
+      "to": "QFRM-029",
+      "primary": true
+    },
+    {
+      "from": "QFRM-028",
+      "to": "QFRM-030",
+      "primary": true
+    },
+    {
+      "from": "QFRM-030",
+      "to": "QFRM-031",
+      "primary": true
+    },
+    {
+      "from": "QFRM-028",
+      "to": "QFRM-032",
+      "primary": true
+    },
+    {
+      "from": "QFRM-030",
+      "to": "QFRM-032",
+      "primary": false
+    },
+    {
+      "from": "QUE-007",
+      "to": "QFRM-033",
+      "primary": true
+    },
+    {
+      "from": "QFRM-022",
+      "to": "QFRM-033",
+      "primary": false
+    }
+  ],
+  "roots": [
+    "AUTH-001",
+    "QUE-S01",
+    "QFRM-S01",
+    "QFRM-S02",
+    "QFRM-S03",
+    "QFRM-S04",
+    "QFRM-S05"
+  ]
+}
